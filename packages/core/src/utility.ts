@@ -122,6 +122,8 @@ export class Utility {
 
   toHash = (path: string[], hashFn: (str: string) => string): string => hashFn(path.join(':'))
 
+  toClassName: ((property: string, value: string) => string | undefined) | undefined = undefined
+
   private normalizeConfig(config: UtilityConfig) {
     return Object.fromEntries(
       Object.entries(config).map(([property, propertyConfig]) => {
@@ -454,6 +456,11 @@ export class Utility {
    * Returns the resolved className for a given property and value
    */
   getClassName = (property: string, raw: string) => {
+    if (this.toClassName) {
+      const custom = this.toClassName(property, raw)
+      if (custom !== undefined) return custom
+    }
+
     const config = this.configs.get(property)
 
     if (!config || !config.className) {

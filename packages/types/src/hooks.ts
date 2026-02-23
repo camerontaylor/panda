@@ -95,6 +95,12 @@ export interface TokenCreatedHookArgs {
 
 export interface UtilityConfigureOptions {
   toHash?(path: string[], toHash: (str: string) => string): string
+  /**
+   * Override the class name generated for a given CSS property and value.
+   * Receives the CSS property name (e.g. "padding", "display") and the raw value (e.g. "4", "flex").
+   * Return a string to use as the class name, or undefined to fall back to Panda's default naming.
+   */
+  toClassName?(property: string, value: string): string | undefined
 }
 
 export interface UtilityCreatedHookArgs {

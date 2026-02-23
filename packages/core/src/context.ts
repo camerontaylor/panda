@@ -108,6 +108,9 @@ export class Context {
         if (opts.toHash) {
           this.utility.toHash = opts.toHash
         }
+        if (opts.toClassName) {
+          this.utility.toClassName = opts.toClassName
+        }
       },
     })
 
